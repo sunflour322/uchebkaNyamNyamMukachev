@@ -24,7 +24,24 @@ namespace uchebkaNyamNyamMukachev
         public MainWindow()
         {
             InitializeComponent();
-            MainFrame.Navigate(new Pages.List_of_DishesPage());
+            MainFrame.NavigationService.Navigate(new Pages.List_of_DishesPage());
+        }
+
+        private void Button_Click_Dishes(object sender, RoutedEventArgs e)
+        {
+            MainFrame.NavigationService.Navigate(new Pages.List_of_DishesPage());
+        }
+
+        private void Button_Click_Ingre(object sender, RoutedEventArgs e)
+        {
+            MainFrame.NavigationService.Navigate(new Pages.Recipe_for_DishesPage());
+
+        }
+
+        private void Button_Click_Orders(object sender, RoutedEventArgs e)
+        {
+            MainFrame.NavigationService.Navigate(new Pages.List_of_DishesPage());
+
         }
     }
 }

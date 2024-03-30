@@ -13,11 +13,11 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0" Background="White">
-            <Button Content="Dishes" Margin="5" />
-            <Button Content="Ingredients" Margin="5" />
-            <Button Content="Orders" Margin="5" />
+            <Button Content="Dishes" Margin="5" Click="Button_Click_Dishes" />
+            <Button Content="Ingredients" Margin="5" Click="Button_Click_Ingre" />
+            <Button Content="Orders" Margin="5" Click="Button_Click_Orders" />
         </StackPanel>
-        <Frame x:Name="MainFrame" Grid.Column="1"/>
+        <Frame x:Name="MainFrame" Grid.Column="1" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>
     

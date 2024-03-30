@@ -28,30 +28,9 @@ namespace uchebkaNyamNyamMukachev.Pages
             InitializeComponent();
             
             Name = "огурец";
-            NameDishTb.Text = $"Recipe for '{Name}'";
-            CategoryTb.Text = $"Category: {Name}";
-            CookTimeTb.Text = $"Cooking time: {Name}";
-            DescTb.Text = $"Short description: {Name}";
-            CostTb.Text = $"Total cost: {CostText}";
+            
         }
 
-        private void Button_Click_Plus(object sender, RoutedEventArgs e)
-        {
-            CountTb.Text = Convert.ToString(count + 1);
-            count++;
-            CostText = Convert.ToString(count * cost);
-            CostTb.Text = $"Total cost: {CostText}";
-        }
-
-        private void Button_Click_Minus(object sender, RoutedEventArgs e)
-        {
-            if(count > 0)
-            {
-                CountTb.Text = Convert.ToString(count - 1);
-                count--;
-                CostText = Convert.ToString(count * cost);
-                CostTb.Text = $"Total cost: {CostText}";
-            }
-        }
+        
     }
 }
