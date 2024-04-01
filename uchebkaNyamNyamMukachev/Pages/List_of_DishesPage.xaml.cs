@@ -20,19 +20,29 @@ namespace uchebkaNyamNyamMukachev.Pages
     /// </summary>
     public partial class List_of_DishesPage : Page
     {
-        private int count = 0;
-        private int cost = 54;
-        private string CostText;
+        
         public List_of_DishesPage()
         {
             InitializeComponent();
-            
-            Name = "огурец";
-            
+            var categ = App.BD.Category.ToList();
+            categ.Insert(0, new BD.Category() { Id = 0, Name = "Все" });
+            CategCb.ItemsSource = categ.ToList();
+            CategCb.DisplayMemberPath = "Name";
+
+            DishesLv.ItemsSource = App.BD.Dish.ToList();
         }
 
         private void CostTb_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
+            
+        }
+
+        private void NameDishTb_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if(NameDishTb.Text == string.Empty && CategCb.SelectedIndex == 0)
+            {
+                MessageBox.Show("удачно");
+            }
             
         }
     }

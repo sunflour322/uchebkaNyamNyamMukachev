@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
       xmlns:local="clr-namespace:uchebkaNyamNyamMukachev.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
@@ -29,11 +30,11 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <TextBlock FontWeight="Bold" Margin="10 0 0 0" Text="List of Dishes" Grid.ColumnSpan="4" FontSize="24"></TextBlock>
-        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal">
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="3" Orientation="Horizontal">
             <TextBlock Text="Category: " Margin="10 0 0 0" FontSize="12" VerticalAlignment="Top"></TextBlock>
-            <ComboBox x:Name="ывфв" Width="100" Height="20" VerticalAlignment="Top" Margin="5 0 0 0"></ComboBox>
+            <ComboBox x:Name="CategCb" Width="100" Height="20" VerticalAlignment="Top" Margin="5 0 0 0"></ComboBox>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.ColumnSpan="3" VerticalAlignment="Bottom">
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.ColumnSpan="3" VerticalAlignment="Bottom" Margin="0 0 0 5">
             <CheckBox Margin="5 0 0 5"></CheckBox>
             <TextBlock Text=" Show only dishes with available ingredients"/>
         </StackPanel>
@@ -43,40 +44,29 @@
 
         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2">
             <TextBlock FontSize="12" Margin="0 0 5 0" >Name:</TextBlock>
-            <TextBox x:Name="NameDishTb" Width="100" Height="20" Margin="5 0 5 0" VerticalAlignment="Top"></TextBox>
+            <TextBox x:Name="NameDishTb" Width="100" Height="20" Margin="5 0 5 0" VerticalAlignment="Top" TextChanged="NameDishTb_TextChanged"></TextBox>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="3">
+        <StackPanel Margin="0 0 0 5" Orientation="Horizontal" VerticalAlignment="Bottom" Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="3">
             <TextBlock FontSize="12" Margin="0 0 15 0" >Price:</TextBlock>
-            <Slider  IsSnapToTickEnabled="True" Maximum="50" 
-                     AutoToolTipPlacement="BottomRight" Value="0"
-                     AutoToolTipPrecision="2" 
-                     Margin="0 0 -10 5"
-                     x:Name="CostTb" ValueChanged="CostTb_ValueChanged"  
-                     TickFrequency="2" VerticalAlignment="Center" Width="50"/>
-            <Slider  IsSnapToTickEnabled="True" Maximum="100" Minimum="50"
-                     AutoToolTipPlacement="BottomRight" Value="50" 
-                     AutoToolTipPrecision="2" 
-                     x:Name="CostTb2" ValueChanged="CostTb_ValueChanged"  
-                     TickFrequency="2"  VerticalAlignment="Center" Width="50" 
-                     Margin="0 0 0 5"/>
-        </StackPanel>
-        <ListView Grid.Row="2" Grid.ColumnSpan="8" Grid.RowSpan="5" Margin="5 5 10 10" ItemsSource="{Binding Items}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-            <ListView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Horizontal"/>
-                </ItemsPanelTemplate>
-            </ListView.ItemsPanel>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Padding="5">
-                        <!-- Create your card layout here -->
-                        <StackPanel>
-                            <TextBlock Text="{Binding Name}" FontWeight="Bold"/>
-                            <TextBlock Text="{Binding Description}" TextWrapping="Wrap"/>
-                        </StackPanel>
-                    </Border>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>    
+            <controls:RangeSlider Minimum="0" Maximum="100" LowerValue="20" UpperValue="80" Width="100"/>
+    </StackPanel>
+        <ListView x:Name="DishesLv" ItemsSource="{Binding Dish}" Grid.Row="2" Grid.RowSpan="5" Grid.ColumnSpan="8">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid Margin="5">
+                                    <StackPanel>
+                                        <Image Source="{Binding Image}" Height="100" Width="100"/>
+                                        <TextBlock Text="{Binding Name}" TextAlignment="Center" Margin="5"/>
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>  
     </Grid>
 </Page>
