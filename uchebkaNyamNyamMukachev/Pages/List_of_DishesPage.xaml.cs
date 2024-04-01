@@ -31,6 +31,9 @@ namespace uchebkaNyamNyamMukachev.Pages
             
         }
 
-        
+        private void CostTb_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            
+        }
     }
 }
