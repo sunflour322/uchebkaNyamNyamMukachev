@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using uchebkaNyamNyamMukachev.BD;
 
 namespace uchebkaNyamNyamMukachev.Pages
 {
@@ -31,7 +32,10 @@ namespace uchebkaNyamNyamMukachev.Pages
 
             DishesLv.ItemsSource = App.BD.Dish.ToList();
         }
-
+        private void Sort()
+        {
+            DishesLv.ItemsSource = new List<Dish>(App.BD.Dish.Where(i => i.Name.StartsWith(NameDishTb.Text) && i.CategoryId == CategCb.SelectedIndex));
+        }
         private void CostTb_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             
@@ -39,11 +43,13 @@ namespace uchebkaNyamNyamMukachev.Pages
 
         private void NameDishTb_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if(NameDishTb.Text == string.Empty && CategCb.SelectedIndex == 0)
-            {
-                MessageBox.Show("удачно");
-            }
-            
+            Sort();
+        }
+        
+
+        private void CategCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Sort();
         }
     }
 }

@@ -32,7 +32,7 @@
         <TextBlock FontWeight="Bold" Margin="10 0 0 0" Text="List of Dishes" Grid.ColumnSpan="4" FontSize="24"></TextBlock>
         <StackPanel Grid.Row="1" Grid.ColumnSpan="3" Orientation="Horizontal">
             <TextBlock Text="Category: " Margin="10 0 0 0" FontSize="12" VerticalAlignment="Top"></TextBlock>
-            <ComboBox x:Name="CategCb" Width="100" Height="20" VerticalAlignment="Top" Margin="5 0 0 0"></ComboBox>
+            <ComboBox x:Name="CategCb" Width="100" Height="20" VerticalAlignment="Top" Margin="5 0 0 0" SelectionChanged="CategCb_SelectionChanged"></ComboBox>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.ColumnSpan="3" VerticalAlignment="Bottom" Margin="0 0 0 5">
             <CheckBox Margin="5 0 0 5"></CheckBox>
@@ -60,6 +60,7 @@
                                     <StackPanel>
                                         <Image Source="{Binding Image}" Height="100" Width="100"/>
                                         <TextBlock Text="{Binding Name}" TextAlignment="Center" Margin="5"/>
+                                        <TextBlock Text="{Binding Price}" TextAlignment="Right" Margin="5"/>
                                     </StackPanel>
                                 </Grid>
                             </DataTemplate>
