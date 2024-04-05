@@ -30,24 +30,25 @@ namespace uchebkaNyamNyamMukachev.Pages
             CategCb.ItemsSource = categ.ToList();
             CategCb.DisplayMemberPath = "Name";
 
-            DishesLv.ItemsSource = App.BD.Dish.ToList();
+            PriceRs.Minimum = App.BD.Dish.Min(i => i.FinalPriceInCents);
+            PriceRs.Maximum = App.BD.Dish.Max(i => i.FinalPriceInCents);
+            PriceRs.UpperValue = PriceRs.Maximum;
+            PriceRs.LowerValue = PriceRs.Minimum;
         }
         private void Sort()
         {
-            DishesLv.ItemsSource = new List<Dish>(App.BD.Dish.Where(i => i.Name.StartsWith(NameDishTb.Text) && i.CategoryId == CategCb.SelectedIndex));
-        }
-        private void CostTb_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
+            DishesLv.ItemsSource = new List<Dish>(App.BD.Dish.Where(i => i.Name.StartsWith(NameDishTb.Text) && i.CategoryId == CategCb.SelectedIndex && i.FinalPriceInCents <= PriceRs.UpperValue && i.FinalPriceInCents >= PriceRs.LowerValue));
             
         }
-
         private void NameDishTb_TextChanged(object sender, TextChangedEventArgs e)
         {
             Sort();
         }
-        
-
         private void CategCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Sort();
+        }
+        private void PriceRs_RangeSelectionChanged(object sender, MahApps.Metro.Controls.RangeSelectionChangedEventArgs<double> e)
         {
             Sort();
         }
