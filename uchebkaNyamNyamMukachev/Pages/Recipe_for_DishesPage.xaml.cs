@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,8 +38,39 @@ namespace uchebkaNyamNyamMukachev.Pages
             CountTb.Text = dish.BaseServingsQuantity.ToString();
             CostTb.Text = $"Total cost: {dish.FinalPriceInCents * dish.BaseServingsQuantity}";
 
-            var ingrOfSt = App.BD.IngredientOfStage.Where(x => x.CookingStageId == cookingSt.id);
-            IngrDg.ItemsSource = App.BD.Ingredient.Where(x => x.Name == dish.Name).ToList();
+            //var res = cookingSt
+            //.Join(App.BD.IngredientOfStage,
+            //    t1 => t1.Id,
+            //    t2 => t2.CookingStageId,
+            //    (t1, t2) => new
+            //    {
+            //        Table2Field = t2.IngredientId
+            //    }).Join(App.BD.Ingredient,
+            //    t2 => t2.Table2Field,
+            //    t3 => t3.Id,
+            //    (t2, t3) => new
+            //    {
+            //        Table3Field = t3.Id
+            //    }).Join(App.BD.Unit,
+            //    t3 => t3.Table3Field,
+            //    t4 => t4.Id,
+            //    (t3, t4) => new
+            //    {
+            //    });
+            var res =  (from row1 in cookingSt
+                        join row2 in App.BD.IngredientOfStage on row1.Id equals row2.CookingStageId
+                        join row3 in App.BD.Ingredient on row2.IngredientId equals row3.Id
+                        join row4 in App.BD.Unit on row3.UnitId equals row4.Id
+                        group new { row1, row2, row3, row4 }  by row3.Name into grouped
+                        select new
+                        {
+                            ingred = grouped.Key,
+                            quan = grouped.Sum(x => x.row2.Quantity),
+                            unit = grouped.Select(x => x.row4.Name),
+                            cost = grouped.Sum(x => x.row3.CostInCents)
+                        }).Distinct();
+            IngrDg.ItemsSource = res.ToList();
+             
         }
 
         

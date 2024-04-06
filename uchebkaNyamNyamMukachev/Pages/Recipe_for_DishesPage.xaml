@@ -45,10 +45,10 @@
             <DataGrid Height="200" Margin="0 0 0 5" x:Name="IngrDg">
                 <DataGrid.Columns>
                     <DataGridTextColumn></DataGridTextColumn>
-                    <DataGridTextColumn Width="100" Header="Name"></DataGridTextColumn>
-                    <DataGridTextColumn Width="70" Header="Quantity"></DataGridTextColumn>
-                    <DataGridTextColumn Width="70" Header="Unit"></DataGridTextColumn>
-                    <DataGridTextColumn Width="70" Header="Cost"></DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding  ingred}" Width="100" Header="Name"></DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding  quan}" Width="70" Header="Quantity"></DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding  unit}" Width="70" Header="Unit"></DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding  cost}" Width="70" Header="Cost"></DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
