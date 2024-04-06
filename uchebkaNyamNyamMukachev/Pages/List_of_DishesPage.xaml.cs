@@ -34,23 +34,47 @@ namespace uchebkaNyamNyamMukachev.Pages
             PriceRs.Maximum = App.BD.Dish.Max(i => i.FinalPriceInCents);
             PriceRs.UpperValue = PriceRs.Maximum;
             PriceRs.LowerValue = PriceRs.Minimum;
-        }
-        private void Sort()
-        {
-            DishesLv.ItemsSource = new List<Dish>(App.BD.Dish.Where(i => i.Name.StartsWith(NameDishTb.Text) && i.CategoryId == CategCb.SelectedIndex && i.FinalPriceInCents <= PriceRs.UpperValue && i.FinalPriceInCents >= PriceRs.LowerValue));
-            
+            CategCb.SelectedIndex = 0;
         }
         private void NameDishTb_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Sort();
+            var query = App.BD.Dish.Where(i =>
+            i.Name.StartsWith(NameDishTb.Text) &&
+            i.FinalPriceInCents <= PriceRs.UpperValue &&
+            i.FinalPriceInCents >= PriceRs.LowerValue);
+
+            if (CategCb.SelectedIndex != 0) 
+            {
+                query = query.Where(i => i.CategoryId == CategCb.SelectedIndex);
+            }
+
+            DishesLv.ItemsSource = new List<Dish>(query);
         }
         private void CategCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Sort();
+            var query = App.BD.Dish.Where(i =>
+            i.Name.StartsWith(NameDishTb.Text) &&
+            i.FinalPriceInCents <= PriceRs.UpperValue &&
+            i.FinalPriceInCents >= PriceRs.LowerValue);
+            if (CategCb.SelectedIndex != 0) 
+            {
+                query = query.Where(i => i.CategoryId == CategCb.SelectedIndex);
+            }
+
+            DishesLv.ItemsSource = new List<Dish>(query);
         }
         private void PriceRs_RangeSelectionChanged(object sender, MahApps.Metro.Controls.RangeSelectionChangedEventArgs<double> e)
         {
-            Sort();
+            var query = App.BD.Dish.Where(i =>
+            i.Name.StartsWith(NameDishTb.Text) &&
+            i.FinalPriceInCents <= PriceRs.UpperValue &&
+            i.FinalPriceInCents >= PriceRs.LowerValue);
+            if (CategCb.SelectedIndex != 0) 
+            {
+                query = query.Where(i => i.CategoryId == CategCb.SelectedIndex);
+            }
+
+            DishesLv.ItemsSource = new List<Dish>(query);
         }
     }
 }
