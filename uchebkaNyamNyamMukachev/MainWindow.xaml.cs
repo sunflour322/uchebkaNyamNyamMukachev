@@ -34,7 +34,7 @@ namespace uchebkaNyamNyamMukachev
 
         private void Button_Click_Ingre(object sender, RoutedEventArgs e)
         {
-            MainFrame.NavigationService.Navigate(new Pages.Recipe_for_DishesPage());
+            MainFrame.NavigationService.Navigate(new Pages.Recipe_for_DishesPage(App.selectedDish));
 
         }
 

@@ -50,20 +50,25 @@
             <TextBlock FontSize="12" Margin="0 0 15 0" >Price:</TextBlock>
             <controls:RangeSlider Width="280" x:Name="PriceRs" RangeSelectionChanged="PriceRs_RangeSelectionChanged" AutoToolTipPlacement="TopLeft"/>
     </StackPanel>
-        <ListView Grid.Row="2" Grid.ColumnSpan="9" Grid.RowSpan="5" ScrollViewer.HorizontalScrollBarVisibility="Disabled" x:Name="DishesLv" d:ItemsSource="{d:SampleData ItemCount=3}" Margin="25,28,25,0">
+        <ListView Grid.Row="2" Grid.ColumnSpan="7" Grid.RowSpan="5" 
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                  x:Name="DishesLv" d:ItemsSource="{d:SampleData ItemCount=3}"
+                  Margin="25,28,25,0" SelectionChanged="DishesLv_SelectionChanged">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
+                    <Grid Width="150" Height="225">
                         <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="150"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="25"/>
                         </Grid.RowDefinitions>
                         <Button x:Name="DisplayImg">
                             <Image Source="{Binding RecipeLink}" Height="150" Width="150" ></Image>
                         </Button>
-                        <TextBlock Grid.Row="1" Text="{Binding Name}" TextWrapping="Wrap" HorizontalAlignment="Center"></TextBlock>
-                        <TextBlock Grid.Row="2" Text="{Binding FinalPriceInCents}" HorizontalAlignment="Center"></TextBlock>
+                        <TextBlock Grid.Row="1" Text="{Binding Name}" TextWrapping="Wrap"
+                                   HorizontalAlignment="Center"></TextBlock>
+                        <TextBlock Grid.Row="2" Text="{Binding FinalPriceInCents}" 
+                                   HorizontalAlignment="Center"></TextBlock>
 
                     </Grid>
                 </DataTemplate>

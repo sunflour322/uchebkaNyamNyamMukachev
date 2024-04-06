@@ -28,21 +28,21 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock FontWeight="Bold" Margin="10 0 0 0" x:Name="NameDishTb" Grid.ColumnSpan="4" FontSize="24"></TextBlock>
+        <TextBlock FontWeight="Bold" Margin="10 0 0 0" x:Name="NameDishTb" Grid.ColumnSpan="8" FontSize="22"></TextBlock>
         <TextBlock Margin="10 0 0 0" Grid.Row="1"  x:Name="CategoryTb" Grid.ColumnSpan="2" FontSize="12" VerticalAlignment="Top"></TextBlock>
         <TextBlock Margin="10 0 0 0" Grid.Row="1"  x:Name="CookTimeTb" Grid.ColumnSpan="2" FontSize="12" VerticalAlignment="Center"></TextBlock>
-        <TextBlock Margin="10 0 0 0" Grid.Row="1"  x:Name="DescTb" Grid.ColumnSpan="8" TextWrapping="Wrap" FontSize="12" VerticalAlignment="Bottom"></TextBlock>
+        <TextBlock Margin="10 0 0 0" Grid.Row="2"  x:Name="DescTb" Grid.ColumnSpan="8" TextWrapping="Wrap" FontSize="12"  ></TextBlock>
         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2">
             <TextBlock FontSize="12" Margin="0 0 5 0" >Servings:</TextBlock>
             <Button Content="-" Width="20" Height="20" VerticalAlignment="Top" Click="Button_Click_Minus" ></Button>
-            <TextBox x:Name="CountTb" Width="40" Height="20" Margin="5 0 5 0" VerticalAlignment="Top" IsReadOnly="True"></TextBox>
+            <TextBox x:Name="CountTb" Width="40" TextAlignment="Center" Height="20" Margin="5 0 5 0" VerticalAlignment="Top" IsReadOnly="True"></TextBox>
             <Button Content="+" Width="20" Height="20" VerticalAlignment="Top" Click="Button_Click_Plus"></Button>
         </StackPanel>
         <TextBlock x:Name="CostTb" Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2" VerticalAlignment="Center"></TextBlock>
 
-        <StackPanel Orientation="Vertical" Grid.Row="2" Grid.RowSpan="4" Grid.ColumnSpan="4">
+        <StackPanel Orientation="Vertical" Grid.Row="3" Grid.RowSpan="4" Grid.ColumnSpan="4" VerticalAlignment="Bottom">
             <TextBlock FontSize="20" HorizontalAlignment="Center" Margin="0 0 0 10">Ingredients:</TextBlock>
-            <DataGrid Height="200">
+            <DataGrid Height="200" Margin="0 0 0 5" x:Name="IngrDg">
                 <DataGrid.Columns>
                     <DataGridTextColumn></DataGridTextColumn>
                     <DataGridTextColumn Width="100" Header="Name"></DataGridTextColumn>
@@ -52,9 +52,9 @@
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
-        <StackPanel Orientation="Vertical" Grid.Row="2" Grid.RowSpan="4" Grid.Column="4" Grid.ColumnSpan="4">
+        <StackPanel Orientation="Vertical" Grid.Row="3" Grid.RowSpan="4" Grid.Column="4" VerticalAlignment="Bottom" Grid.ColumnSpan="4">
             <TextBlock FontSize="20" HorizontalAlignment="Center" Margin="0 0 0 10">Cooking Process:</TextBlock>
-            <TextBox Margin="5 0 5 0" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" TextWrapping="Wrap" Height="200"></TextBox>
+            <TextBox Margin="5 0 5 5" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" TextWrapping="Wrap" Height="200"></TextBox>
         </StackPanel>
     </Grid>
 </Page>

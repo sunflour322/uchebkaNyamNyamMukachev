@@ -36,45 +36,37 @@ namespace uchebkaNyamNyamMukachev.Pages
             PriceRs.LowerValue = PriceRs.Minimum;
             CategCb.SelectedIndex = 0;
         }
-        private void NameDishTb_TextChanged(object sender, TextChangedEventArgs e)
+        private void Sort()
         {
             var query = App.BD.Dish.Where(i =>
             i.Name.StartsWith(NameDishTb.Text) &&
             i.FinalPriceInCents <= PriceRs.UpperValue &&
             i.FinalPriceInCents >= PriceRs.LowerValue);
 
-            if (CategCb.SelectedIndex != 0) 
+            if (CategCb.SelectedIndex != 0)
             {
                 query = query.Where(i => i.CategoryId == CategCb.SelectedIndex);
             }
 
             DishesLv.ItemsSource = new List<Dish>(query);
+        }
+        private void NameDishTb_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Sort();
         }
         private void CategCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var query = App.BD.Dish.Where(i =>
-            i.Name.StartsWith(NameDishTb.Text) &&
-            i.FinalPriceInCents <= PriceRs.UpperValue &&
-            i.FinalPriceInCents >= PriceRs.LowerValue);
-            if (CategCb.SelectedIndex != 0) 
-            {
-                query = query.Where(i => i.CategoryId == CategCb.SelectedIndex);
-            }
-
-            DishesLv.ItemsSource = new List<Dish>(query);
+            Sort();
         }
         private void PriceRs_RangeSelectionChanged(object sender, MahApps.Metro.Controls.RangeSelectionChangedEventArgs<double> e)
         {
-            var query = App.BD.Dish.Where(i =>
-            i.Name.StartsWith(NameDishTb.Text) &&
-            i.FinalPriceInCents <= PriceRs.UpperValue &&
-            i.FinalPriceInCents >= PriceRs.LowerValue);
-            if (CategCb.SelectedIndex != 0) 
-            {
-                query = query.Where(i => i.CategoryId == CategCb.SelectedIndex);
-            }
+            Sort();
+        }
 
-            DishesLv.ItemsSource = new List<Dish>(query);
+        private void DishesLv_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            App.selectedDish = (Dish)DishesLv.SelectedItem;
+            NavigationService.Navigate(new Recipe_for_DishesPage(App.selectedDish));
         }
     }
 }
