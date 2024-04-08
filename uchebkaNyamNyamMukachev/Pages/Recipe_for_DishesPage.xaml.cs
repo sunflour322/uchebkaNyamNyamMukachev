@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.UI.WebControls;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -22,6 +23,7 @@ namespace uchebkaNyamNyamMukachev.Pages
     /// </summary>
     public partial class Recipe_for_DishesPage : Page
     {
+        
         private Dish dish;
         private int count;
         private int fullCost;
@@ -64,16 +66,28 @@ namespace uchebkaNyamNyamMukachev.Pages
                         group new { row1, row2, row3, row4 }  by row3.Name into grouped
                         select new
                         {
-                            ingred = grouped.Key,
-                            quan = grouped.Sum(x => x.row2.Quantity),
-                            unit = grouped.Select(x => x.row4.Name),
-                            cost = grouped.Sum(x => x.row3.CostInCents)
+                            ok = grouped.Sum(x => x.row2.Quantity) != 0,
+                            Name = grouped.Key,
+                            Quantity = grouped.Sum(x => x.row2.Quantity),
+                            Unit = grouped.Select(x => x.row4.Name).FirstOrDefault(),
+                            Cost = grouped.Sum(x => x.row3.CostInCents)
                         }).Distinct();
             IngrDg.ItemsSource = res.ToList();
-             
+
+            var numberedText = new StringBuilder();
+            int i = 1;
+            var recipes = cookingSt.ToList();
+            foreach (var recipe in recipes)
+            {
+                numberedText.AppendLine($"{i}. {recipe.ProcessDescription}");
+                i++;
+            }
+            CookProcTb.Text = numberedText.ToString();
+
+
         }
 
-        
+
 
         private void Button_Click_Plus(object sender, RoutedEventArgs e)
         {
