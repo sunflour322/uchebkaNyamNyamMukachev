@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
@@ -39,26 +40,8 @@ namespace uchebkaNyamNyamMukachev.Pages
             DescTb.Text = $"Short description: {dish.Description}";
             CountTb.Text = dish.BaseServingsQuantity.ToString();
             CostTb.Text = $"Total cost: {dish.FinalPriceInCents * dish.BaseServingsQuantity}";
-
-            //var res = cookingSt
-            //.Join(App.BD.IngredientOfStage,
-            //    t1 => t1.Id,
-            //    t2 => t2.CookingStageId,
-            //    (t1, t2) => new
-            //    {
-            //        Table2Field = t2.IngredientId
-            //    }).Join(App.BD.Ingredient,
-            //    t2 => t2.Table2Field,
-            //    t3 => t3.Id,
-            //    (t2, t3) => new
-            //    {
-            //        Table3Field = t3.Id
-            //    }).Join(App.BD.Unit,
-            //    t3 => t3.Table3Field,
-            //    t4 => t4.Id,
-            //    (t3, t4) => new
-            //    {
-            //    });
+            count = Convert.ToInt32(CountTb.Text);
+            var car = App.BD.Ingredient.Sum(x => x.AvailableCount);
             var res =  (from row1 in cookingSt
                         join row2 in App.BD.IngredientOfStage on row1.Id equals row2.CookingStageId
                         join row3 in App.BD.Ingredient on row2.IngredientId equals row3.Id
@@ -66,11 +49,11 @@ namespace uchebkaNyamNyamMukachev.Pages
                         group new { row1, row2, row3, row4 }  by row3.Name into grouped
                         select new
                         {
-                            ok = grouped.Sum(x => x.row2.Quantity) != 0,
+                            ok = grouped.Sum(x => x.row2.Quantity) < grouped.Sum(x => x.row3.AvailableCount),
                             Name = grouped.Key,
                             Quantity = grouped.Sum(x => x.row2.Quantity),
                             Unit = grouped.Select(x => x.row4.Name).FirstOrDefault(),
-                            Cost = grouped.Sum(x => x.row3.CostInCents)
+                            Cost = grouped.Sum(x => x.row3.CostInCents * x.row2.Quantity)
                         }).Distinct();
             IngrDg.ItemsSource = res.ToList();
 
@@ -83,12 +66,7 @@ namespace uchebkaNyamNyamMukachev.Pages
                 i++;
             }
             CookProcTb.Text = numberedText.ToString();
-
-
         }
-
-
-
         private void Button_Click_Plus(object sender, RoutedEventArgs e)
         {
             count = Convert.ToInt32(CountTb.Text);
@@ -96,7 +74,6 @@ namespace uchebkaNyamNyamMukachev.Pages
             count++;
             fullCost = count * dish.FinalPriceInCents;
             CostTb.Text = $"Total cost: {fullCost}";
-
         }
 
         private void Button_Click_Minus(object sender, RoutedEventArgs e)

@@ -26,7 +26,7 @@ namespace uchebkaNyamNyamMukachev.Pages
         {
             InitializeComponent();
             var categ = App.BD.Category.ToList();
-            categ.Insert(0, new BD.Category() { Id = 0, Name = "Все" });
+            categ.Insert(0, new BD.Category() { Id = 0, Name = "All" });
             CategCb.ItemsSource = categ.ToList();
             CategCb.DisplayMemberPath = "Name";
 
@@ -39,9 +39,9 @@ namespace uchebkaNyamNyamMukachev.Pages
         private void Sort()
         {
             var query = App.BD.Dish.Where(i =>
-            i.Name.StartsWith(NameDishTb.Text) &&
-            i.FinalPriceInCents <= PriceRs.UpperValue &&
-            i.FinalPriceInCents >= PriceRs.LowerValue);
+                i.Name.StartsWith(NameDishTb.Text) &&
+                i.FinalPriceInCents <= PriceRs.UpperValue &&
+                i.FinalPriceInCents >= PriceRs.LowerValue);
 
             if (CategCb.SelectedIndex != 0)
             {
