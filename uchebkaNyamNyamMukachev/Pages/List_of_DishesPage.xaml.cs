@@ -68,5 +68,10 @@ namespace uchebkaNyamNyamMukachev.Pages
             App.selectedDish = (Dish)DishesLv.SelectedItem;
             NavigationService.Navigate(new Recipe_for_DishesPage(App.selectedDish));
         }
+
+        private void BlWhCb_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

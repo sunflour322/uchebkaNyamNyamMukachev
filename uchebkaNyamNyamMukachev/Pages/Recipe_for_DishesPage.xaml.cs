@@ -48,7 +48,7 @@ namespace uchebkaNyamNyamMukachev.Pages
                        group new { row1, row2, row3, row4 } by row3.Name into grouped
                        select new
                        {
-                           OK = grouped.Sum(x => x.row2.Quantity) < grouped.Select(x => x.row3.AvailableCount).FirstOrDefault(),
+                           OK = grouped.Sum(x => x.row2.Quantity) * count < grouped.Select(x => x.row3.AvailableCount).FirstOrDefault(),
                            Name = grouped.Key,
                            Quantity = grouped.Sum(x => x.row2.Quantity) * count,
                            Unit = grouped.Select(x => x.row4.Name).FirstOrDefault(),
@@ -102,7 +102,7 @@ namespace uchebkaNyamNyamMukachev.Pages
                         group new { row1, row2, row3, row4 }  by row3.Name into grouped
                         select new
                         {
-                            OK = grouped.Sum(x => x.row2.Quantity) < grouped.Select(x => x.row3.AvailableCount).FirstOrDefault(),
+                            OK = grouped.Sum(x => x.row2.Quantity) * count < grouped.Select(x => x.row3.AvailableCount).FirstOrDefault(),
                             Name = grouped.Key,
                             Quantity = grouped.Sum(x => x.row2.Quantity) * count ,
                             Unit = grouped.Select(x => x.row4.Name).FirstOrDefault(),
