@@ -24,7 +24,7 @@ namespace uchebkaNyamNyamMukachev.BD
         public string Name { get; set; }
         public int CostInCents { get; set; }
         public int UnitId { get; set; }
-        public double AvailableCount { get; set; }
+        public decimal AvailableCount { get; set; }
     
         public virtual Unit Unit { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
