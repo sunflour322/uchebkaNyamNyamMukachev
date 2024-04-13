@@ -8,7 +8,6 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="List_of_DishesPage">
-
     <Grid Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -35,7 +34,7 @@
             <ComboBox x:Name="CategCb" Width="100" Height="20" VerticalAlignment="Top" Margin="5 0 0 0" SelectionChanged="CategCb_SelectionChanged"></ComboBox>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.ColumnSpan="3" VerticalAlignment="Bottom" Margin="0 0 0 5">
-            <CheckBox Margin="5 0 0 5" x:Name="BlWhCb" Checked="BlWhCb_Checked"></CheckBox>
+            <CheckBox Margin="5 0 0 5" x:Name="BlWhCb" Checked="BlWhCb_Checked" ></CheckBox>
             <TextBlock Text=" Show only dishes with available ingredients"/>
         </StackPanel>
         <StackPanel>

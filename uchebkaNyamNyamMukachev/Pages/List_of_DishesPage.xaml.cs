@@ -1,8 +1,11 @@
-﻿using System;
+﻿using EO.Wpf;
+using EO.Wpf.Primitives;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.UI.WebControls;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -71,7 +74,35 @@ namespace uchebkaNyamNyamMukachev.Pages
 
         private void BlWhCb_Checked(object sender, RoutedEventArgs e)
         {
-
+            if(BlWhCb.IsChecked == true)
+            {
+                foreach (var item in DishesLv.Items)
+                {
+                    // Проверяем выполнение условия для каждого элемента списка
+                    //if ((item)) // Замените "YourCondition" на ваше условие
+                    //{
+                    // Получаем контейнер элемента ListView
+                    var container = DishesLv.ItemContainerGenerator.ContainerFromItem(item) as FrameworkElement;
+                    if (container != null)
+                    {
+                        // Находим кнопку в контейнере
+                        var button = container.FindName("DisplayImg") as System.Windows.Controls.Button;
+                        if (button != null)
+                        {
+                            // Получаем изображение внутри кнопки
+                            var image = button.Content as System.Windows.Controls.Image;
+                            if (image != null)
+                            {
+                                // Применяем черно-белую фильтрацию к изображению
+                                image.Effect = new GrayscaleEffect();
+                            }
+                        }
+                    }
+                    //}
+                }
+            }
+            
+           
         }
     }
 }
