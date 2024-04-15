@@ -41,15 +41,14 @@
         <TextBlock x:Name="CostTb" Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2" VerticalAlignment="Center"></TextBlock>
 
         <StackPanel Orientation="Vertical" Grid.Row="3" Grid.RowSpan="4" Grid.ColumnSpan="4" VerticalAlignment="Bottom">
-            <TextBlock FontSize="20" HorizontalAlignment="Center" Margin="0 0 0 10">Ingredients:</TextBlock>
-            <DataGrid Height="200" Margin="0 0 0 5" x:Name="IngrDg" AutoGenerateColumns="True" VerticalScrollBarVisibility="Disabled">
-                <DataGrid.Columns>
-                    
+            <TextBlock FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" Margin="0 0 0 10">Ingredients:</TextBlock>
+            <DataGrid   Height="200" Margin="0 0 0 5" x:Name="IngrDg" AutoGenerateColumns="True" VerticalScrollBarVisibility="Disabled">
+                <DataGrid.Columns >
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Row="3" Grid.RowSpan="4" Grid.Column="4" VerticalAlignment="Bottom" Grid.ColumnSpan="4">
-            <TextBlock FontSize="20" HorizontalAlignment="Center" Margin="0 0 0 10">Cooking Process:</TextBlock>
+            <TextBlock FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" Margin="0 0 0 10">Cooking Process:</TextBlock>
             <TextBox Margin="5 0 5 5" x:Name="CookProcTb" IsReadOnly="True" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" TextWrapping="Wrap" Height="200"></TextBox>
         </StackPanel>
     </Grid>

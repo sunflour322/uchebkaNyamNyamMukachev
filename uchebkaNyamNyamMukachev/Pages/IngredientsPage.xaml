@@ -44,7 +44,7 @@
                                 </TextBlock>
                             </StackPanel>
                             <StackPanel VerticalAlignment="Center">
-                                <TextBox x:Name="CoutyTB"  Text="{Binding AvailableCount, Mode=TwoWay}" Width="50" />
+                                <TextBox x:Name="CoutyTB"  Text="{Binding AvailableCount}" Width="50" />
                             </StackPanel>
                             <StackPanel VerticalAlignment="Center">
                                 <TextBlock Text="Unit" Margin="5 0 20 0" />

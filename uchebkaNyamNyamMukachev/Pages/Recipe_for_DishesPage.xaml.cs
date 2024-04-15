@@ -61,6 +61,7 @@ namespace uchebkaNyamNyamMukachev.Pages
             var cookingSt = App.BD.CookingStage.Where(x => x.DishId == dish.Id).ToList();
             int ct = cookingSt.Sum(x => x.TimeInMinutes.Value);
             NameDishTb.Text = $"Recipe for '{dish.Name}'";
+            NameDishTb.FontWeight = FontWeights.ExtraBold;
             CategoryTb.Text = $"Category: {selectedDish.Category.Name}";
             CookTimeTb.Text = $"Cooking time: {ct} min";
             DescTb.Text = $"Short description: {dish.Description}";

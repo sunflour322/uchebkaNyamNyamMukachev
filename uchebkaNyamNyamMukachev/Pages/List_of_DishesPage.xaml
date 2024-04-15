@@ -5,10 +5,14 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
       xmlns:local="clr-namespace:uchebkaNyamNyamMukachev.Pages"
+      xmlns:converters="clr-namespace:uchebkaNyamNyamMukachev.Converters"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="List_of_DishesPage">
     <Grid Background="White">
+        <Grid.Resources>
+            <converters:ConverterToGray x:Key="ToGray"/>
+        </Grid.Resources>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -62,7 +66,11 @@
                             <RowDefinition Height="25"/>
                         </Grid.RowDefinitions>
                         <Button x:Name="DisplayImg">
-                            <Image Source="{Binding RecipeLink}" Height="150" Width="150" ></Image>
+                            <Image Stretch="UniformToFill" Height="150" Width="150" >
+                                <Image.Source>
+                                    <FormatConvertedBitmap Source="{Binding RecipeLink}" DestinationFormat="{Binding ., Converter={StaticResource ToGray}}"/>
+                                </Image.Source>
+                            </Image>
                         </Button>
                         <TextBlock Grid.Row="1" Text="{Binding Name}" TextWrapping="Wrap"
                                    HorizontalAlignment="Center"></TextBlock>

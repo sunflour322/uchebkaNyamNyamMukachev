@@ -27,7 +27,7 @@ namespace uchebkaNyamNyamMukachev.Pages
         {
             InitializeComponent();
             SumCounts();
-            //Ingridientss.ItemsSource = App.BD.Ingredient.Where(x => x.Visible == true).ToList();
+            Ingridientss.ItemsSource = App.BD.Ingredient.ToList();
         }
 
         private void Ingredients_DeleteClick(object sender, RoutedEventArgs e)
@@ -37,13 +37,13 @@ namespace uchebkaNyamNyamMukachev.Pages
             {
                 //ingredient.Visible = false;
                 App.BD.SaveChanges();
-                //Ingridientss.ItemsSource = App.BD.Ingredient.Where(x => x.Visible == true).ToList();
+                Ingridientss.ItemsSource = App.BD.Ingredient.ToList();
                 SumCounts();
             }
         }
         public void SumCounts()
         {
-            SumCentsTB.Text = App.BD.Ingredient.Sum(x => x.CostInCents * x.AvailableCount / 100).ToString();
+            SumCentsTB.Text = App.BD.Ingredient.Sum(x => x.CostInCents * x.AvailableCount).ToString();
         }
 
         private void PlusButton_Click(object sender, RoutedEventArgs e)
@@ -53,7 +53,7 @@ namespace uchebkaNyamNyamMukachev.Pages
             {
                 ingredient.AvailableCount++;
                 App.BD.SaveChanges();
-                //Ingridientss.ItemsSource = App.BD.Ingredient.Where(x => x.Visible == true).ToList();
+                Ingridientss.ItemsSource = App.BD.Ingredient.ToList();
                 SumCounts();
             }
         }
@@ -65,7 +65,7 @@ namespace uchebkaNyamNyamMukachev.Pages
             {
                 ingredient.AvailableCount--;
                 App.BD.SaveChanges();
-                //Ingridientss.ItemsSource = App.BD.Ingredient.Where(x => x.Visible == true).ToList();
+                Ingridientss.ItemsSource = App.BD.Ingredient.ToList();
                 SumCounts();
             }
         }

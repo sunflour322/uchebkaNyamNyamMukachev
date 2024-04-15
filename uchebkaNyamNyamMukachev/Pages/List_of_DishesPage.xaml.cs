@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using uchebkaNyamNyamMukachev.BD;
+using uchebkaNyamNyamMukachev.Classes;
 
 namespace uchebkaNyamNyamMukachev.Pages
 {
@@ -44,11 +45,17 @@ namespace uchebkaNyamNyamMukachev.Pages
             var query = App.BD.Dish.Where(i =>
                 i.Name.StartsWith(NameDishTb.Text) &&
                 i.FinalPriceInCents <= PriceRs.UpperValue &&
-                i.FinalPriceInCents >= PriceRs.LowerValue);
-
+                i.FinalPriceInCents >= PriceRs.LowerValue).ToList();
+            if ((bool)BlWhCb.IsChecked == true)
+            {
+                query = query.Where(x =>
+                {
+                    return DishConverter.ReadyForCooking(x);
+                }).ToList();
+            }
             if (CategCb.SelectedIndex != 0)
             {
-                query = query.Where(i => i.CategoryId == CategCb.SelectedIndex);
+                query = query.Where(i => i.CategoryId == CategCb.SelectedIndex).ToList();
             }
 
             DishesLv.ItemsSource = new List<Dish>(query);
@@ -74,35 +81,7 @@ namespace uchebkaNyamNyamMukachev.Pages
 
         private void BlWhCb_Checked(object sender, RoutedEventArgs e)
         {
-            if(BlWhCb.IsChecked == true)
-            {
-                foreach (var item in DishesLv.Items)
-                {
-                    // Проверяем выполнение условия для каждого элемента списка
-                    //if ((item)) // Замените "YourCondition" на ваше условие
-                    //{
-                    // Получаем контейнер элемента ListView
-                    var container = DishesLv.ItemContainerGenerator.ContainerFromItem(item) as FrameworkElement;
-                    if (container != null)
-                    {
-                        // Находим кнопку в контейнере
-                        var button = container.FindName("DisplayImg") as System.Windows.Controls.Button;
-                        if (button != null)
-                        {
-                            // Получаем изображение внутри кнопки
-                            var image = button.Content as System.Windows.Controls.Image;
-                            if (image != null)
-                            {
-                                // Применяем черно-белую фильтрацию к изображению
-                                image.Effect = new GrayscaleEffect();
-                            }
-                        }
-                    }
-                    //}
-                }
-            }
-            
-           
+            Sort();
         }
     }
 }
