@@ -46,18 +46,18 @@ namespace uchebkaNyamNyamMukachev.Pages
                 i.Name.StartsWith(NameDishTb.Text) &&
                 i.FinalPriceInCents <= PriceRs.UpperValue &&
                 i.FinalPriceInCents >= PriceRs.LowerValue).ToList();
-            if ((bool)BlWhCb.IsChecked == true)
-            {
-                query = query.Where(x =>
-                {
-                    return DishConverter.ReadyForCooking(x);
-                }).ToList();
-            }
+            
             if (CategCb.SelectedIndex != 0)
             {
                 query = query.Where(i => i.CategoryId == CategCb.SelectedIndex).ToList();
             }
-
+            if (BlWhCb.IsChecked == true)
+            {
+                query = query.Where(i =>
+                {
+                    return DishConverter.ReadyForCooking(i);
+                }).ToList();
+            }
             DishesLv.ItemsSource = new List<Dish>(query);
         }
         private void NameDishTb_TextChanged(object sender, TextChangedEventArgs e)
@@ -80,6 +80,11 @@ namespace uchebkaNyamNyamMukachev.Pages
         }
 
         private void BlWhCb_Checked(object sender, RoutedEventArgs e)
+        {
+            Sort();
+        }
+
+        private void BlWhCb_Unchecked(object sender, RoutedEventArgs e)
         {
             Sort();
         }

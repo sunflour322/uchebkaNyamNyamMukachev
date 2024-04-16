@@ -13,10 +13,10 @@ namespace uchebkaNyamNyamMukachev.BD
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class BD_ucheb_mukachevEntities : DbContext
+    public partial class NyamNyam_Session2_mukachevEntities : DbContext
     {
-        public BD_ucheb_mukachevEntities()
-            : base("name=BD_ucheb_mukachevEntities")
+        public NyamNyam_Session2_mukachevEntities()
+            : base("name=NyamNyam_Session2_mukachevEntities")
         {
         }
     

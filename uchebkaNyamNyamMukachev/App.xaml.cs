@@ -15,7 +15,7 @@ namespace uchebkaNyamNyamMukachev
     /// </summary>
     public partial class App : Application
     {
-        public static BD_ucheb_mukachevEntities BD = new BD_ucheb_mukachevEntities();
+        public static NyamNyam_Session2_mukachevEntities BD = new NyamNyam_Session2_mukachevEntities();
         public static Dish selectedDish = new Dish();
     }
 }

@@ -9,7 +9,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="List_of_DishesPage">
-    <Grid Background="White">
+    <Grid Background="#d5c847">
         <Grid.Resources>
             <converters:ConverterToGray x:Key="ToGray"/>
         </Grid.Resources>
@@ -38,7 +38,7 @@
             <ComboBox x:Name="CategCb" Width="100" Height="20" VerticalAlignment="Top" Margin="5 0 0 0" SelectionChanged="CategCb_SelectionChanged"></ComboBox>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.ColumnSpan="3" VerticalAlignment="Bottom" Margin="0 0 0 5">
-            <CheckBox Margin="5 0 0 5" x:Name="BlWhCb" Checked="BlWhCb_Checked" ></CheckBox>
+            <CheckBox Margin="5 0 0 5" x:Name="BlWhCb" Unchecked="BlWhCb_Unchecked" Checked="BlWhCb_Checked" ></CheckBox>
             <TextBlock Text=" Show only dishes with available ingredients"/>
         </StackPanel>
         <StackPanel>
@@ -53,30 +53,27 @@
             <TextBlock FontSize="12" Margin="0 0 15 0" >Price:</TextBlock>
             <controls:RangeSlider Width="280" x:Name="PriceRs" RangeSelectionChanged="PriceRs_RangeSelectionChanged" AutoToolTipPlacement="TopLeft"/>
     </StackPanel>
-        <ListView Grid.Row="2" Grid.ColumnSpan="7" Grid.RowSpan="5" 
+        <ListView Background="#eed4fe" Grid.Row="2" Grid.ColumnSpan="7" Grid.RowSpan="5" 
                   ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                   x:Name="DishesLv" d:ItemsSource="{d:SampleData ItemCount=3}"
                   Margin="25,28,25,0" SelectionChanged="DishesLv_SelectionChanged">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid Width="150" Height="225">
+                    <Grid Width="150" Height="150">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="150"/>
-                            <RowDefinition Height="50"/>
-                            <RowDefinition Height="25"/>
                         </Grid.RowDefinitions>
-                        <Button x:Name="DisplayImg">
-                            <Image Stretch="UniformToFill" Height="150" Width="150" >
+                        <Image Stretch="UniformToFill" Grid.Row="0">
                                 <Image.Source>
                                     <FormatConvertedBitmap Source="{Binding RecipeLink}" DestinationFormat="{Binding ., Converter={StaticResource ToGray}}"/>
                                 </Image.Source>
                             </Image>
-                        </Button>
-                        <TextBlock Grid.Row="1" Text="{Binding Name}" TextWrapping="Wrap"
-                                   HorizontalAlignment="Center"></TextBlock>
-                        <TextBlock Grid.Row="2" Text="{Binding FinalPriceInCents}" 
-                                   HorizontalAlignment="Center"></TextBlock>
-
+                        <StackPanel Grid.Row="0" Orientation="Vertical" VerticalAlignment="Bottom" Background="#88000000" >
+                            <TextBlock  Text="{Binding Name}" TextWrapping="Wrap"
+           HorizontalAlignment="Center" Foreground="White"></TextBlock>
+                            <TextBlock Text="{Binding FinalPriceInCents}" 
+           HorizontalAlignment="Center" Foreground="White"></TextBlock>
+                        </StackPanel>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

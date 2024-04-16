@@ -12,10 +12,10 @@
             <ColumnDefinition Width="120"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="0" Background="White">
-            <Button Content="Dishes" Margin="5" Click="Button_Click_Dishes" />
-            <Button Content="Ingredients" Margin="5" Click="Button_Click_Ingre" />
-            <Button Content="Orders" Margin="5" Click="Button_Click_Orders" />
+        <StackPanel Grid.Column="0" Background="#eed4fe">
+            <TextBlock Margin="5" HorizontalAlignment="Center"><Hyperlink Click="Button_Click_Dishes">Dishes</Hyperlink></TextBlock>
+            <TextBlock Margin="5" HorizontalAlignment="Center"><Hyperlink Click="Button_Click_Ingre">Ingredients</Hyperlink></TextBlock>
+            <TextBlock Margin="5" HorizontalAlignment="Center"><Hyperlink Click="Button_Click_Orders">Orders</Hyperlink></TextBlock>
         </StackPanel>
         <Frame x:Name="MainFrame" Grid.Column="1" NavigationUIVisibility="Hidden"/>
     </Grid>

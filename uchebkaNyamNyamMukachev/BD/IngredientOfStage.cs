@@ -16,7 +16,7 @@ namespace uchebkaNyamNyamMukachev.BD
     {
         public int CookingStageId { get; set; }
         public int IngredientId { get; set; }
-        public decimal Quantity { get; set; }
+        public double Quantity { get; set; }
     
         public virtual CookingStage CookingStage { get; set; }
         public virtual Ingredient Ingredient { get; set; }

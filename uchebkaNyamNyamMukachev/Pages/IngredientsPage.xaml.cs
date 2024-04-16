@@ -35,15 +35,15 @@ namespace uchebkaNyamNyamMukachev.Pages
             var ingredient = (sender as Hyperlink)?.CommandParameter as Ingredient;
             if (ingredient != null)
             {
-                //ingredient.Visible = false;
+                ingredient.Visible = false;
                 App.BD.SaveChanges();
-                Ingridientss.ItemsSource = App.BD.Ingredient.ToList();
+                Ingridientss.ItemsSource = App.BD.Ingredient.Where(x => x.Visible == true).ToList();
                 SumCounts();
             }
         }
         public void SumCounts()
         {
-            SumCentsTB.Text = App.BD.Ingredient.Sum(x => x.CostInCents * x.AvailableCount).ToString();
+            SumCentsTB.Text = App.BD.Ingredient.Sum(x => x.CostInCents * x.AvailableCount / 100).ToString();
         }
 
         private void PlusButton_Click(object sender, RoutedEventArgs e)
@@ -53,7 +53,7 @@ namespace uchebkaNyamNyamMukachev.Pages
             {
                 ingredient.AvailableCount++;
                 App.BD.SaveChanges();
-                Ingridientss.ItemsSource = App.BD.Ingredient.ToList();
+                Ingridientss.ItemsSource = App.BD.Ingredient.Where(x => x.Visible == true).ToList();
                 SumCounts();
             }
         }
@@ -65,7 +65,7 @@ namespace uchebkaNyamNyamMukachev.Pages
             {
                 ingredient.AvailableCount--;
                 App.BD.SaveChanges();
-                Ingridientss.ItemsSource = App.BD.Ingredient.ToList();
+                Ingridientss.ItemsSource = App.BD.Ingredient.Where(x => x.Visible == true).ToList();
                 SumCounts();
             }
         }

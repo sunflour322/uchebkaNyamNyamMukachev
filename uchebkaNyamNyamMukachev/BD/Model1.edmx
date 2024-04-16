@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Хранилище BD_ucheb_mukachevModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище NyamNyam_Session2_mukachevModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="Id" />
@@ -51,7 +51,8 @@
           <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="CostInCents" Type="int" Nullable="false" />
           <Property Name="UnitId" Type="int" Nullable="false" />
-          <Property Name="AvailableCount" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="AvailableCount" Type="float" Nullable="false" />
+          <Property Name="Visible" Type="bit" />
         </EntityType>
         <EntityType Name="IngredientOfStage">
           <Key>
@@ -60,7 +61,7 @@
           </Key>
           <Property Name="CookingStageId" Type="int" Nullable="false" />
           <Property Name="IngredientId" Type="int" Nullable="false" />
-          <Property Name="Quantity" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="Quantity" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -100,18 +101,6 @@
             </Principal>
             <Dependent Role="CookingStage">
               <PropertyRef Name="DishId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Dish_Category">
-          <End Role="Category" Type="Self.Category" Multiplicity="1" />
-          <End Role="Dish" Type="Self.Dish" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Category">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Dish">
-              <PropertyRef Name="CategoryId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -187,7 +176,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Хранилище BD_ucheb_mukachevModelContainer">
+        <EntityContainer Name="Хранилище NyamNyam_Session2_mukachevModelContainer">
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CookingStage" EntityType="Self.CookingStage" Schema="dbo" store:Type="Tables" />
@@ -200,10 +189,6 @@
           <AssociationSet Name="FK_CookingStage_Dish1" Association="Self.FK_CookingStage_Dish1">
             <End Role="Dish" EntitySet="Dish" />
             <End Role="CookingStage" EntitySet="CookingStage" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Dish_Category" Association="Self.FK_Dish_Category">
-            <End Role="Category" EntitySet="Category" />
-            <End Role="Dish" EntitySet="Dish" />
           </AssociationSet>
           <AssociationSet Name="FK_Ingredient_Unit" Association="Self.FK_Ingredient_Unit">
             <End Role="Unit" EntitySet="Unit" />
@@ -233,7 +218,7 @@
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="BD_ucheb_mukachevModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="NyamNyam_Session2_mukachevModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="Id" />
@@ -287,9 +272,10 @@
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CostInCents" Type="Int32" Nullable="false" />
           <Property Name="UnitId" Type="Int32" Nullable="false" />
-          <Property Name="AvailableCount" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="AvailableCount" Type="Double" Nullable="false" />
           <NavigationProperty Name="Unit" Relationship="Self.FK_Ingredient_Unit" FromRole="Ingredient" ToRole="Unit" />
           <NavigationProperty Name="IngredientOfStage" Relationship="Self.FK_IngredientOfStage_Ingredient" FromRole="Ingredient" ToRole="IngredientOfStage" />
+          <Property Name="Visible" Type="Boolean" />
         </EntityType>
         <EntityType Name="IngredientOfStage">
           <Key>
@@ -298,7 +284,7 @@
           </Key>
           <Property Name="CookingStageId" Type="Int32" Nullable="false" />
           <Property Name="IngredientId" Type="Int32" Nullable="false" />
-          <Property Name="Quantity" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="Quantity" Type="Double" Nullable="false" />
           <NavigationProperty Name="CookingStage" Relationship="Self.FK_IngredientOfStage_CookingStage1" FromRole="IngredientOfStage" ToRole="CookingStage" />
           <NavigationProperty Name="Ingredient" Relationship="Self.FK_IngredientOfStage_Ingredient" FromRole="IngredientOfStage" ToRole="Ingredient" />
         </EntityType>
@@ -432,7 +418,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="BD_ucheb_mukachevEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="NyamNyam_Session2_mukachevEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Category" EntityType="Self.Category" />
           <EntitySet Name="Client" EntityType="Self.Client" />
           <EntitySet Name="CookingStage" EntityType="Self.CookingStage" />
@@ -480,9 +466,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище BD_ucheb_mukachevModelContainer" CdmEntityContainer="BD_ucheb_mukachevEntities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище NyamNyam_Session2_mukachevModelContainer" CdmEntityContainer="NyamNyam_Session2_mukachevEntities">
           <EntitySetMapping Name="Category">
-            <EntityTypeMapping TypeName="BD_ucheb_mukachevModel.Category">
+            <EntityTypeMapping TypeName="NyamNyam_Session2_mukachevModel.Category">
               <MappingFragment StoreEntitySet="Category">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -490,7 +476,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Client">
-            <EntityTypeMapping TypeName="BD_ucheb_mukachevModel.Client">
+            <EntityTypeMapping TypeName="NyamNyam_Session2_mukachevModel.Client">
               <MappingFragment StoreEntitySet="Client">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -500,7 +486,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CookingStage">
-            <EntityTypeMapping TypeName="BD_ucheb_mukachevModel.CookingStage">
+            <EntityTypeMapping TypeName="NyamNyam_Session2_mukachevModel.CookingStage">
               <MappingFragment StoreEntitySet="CookingStage">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="DishId" ColumnName="DishId" />
@@ -510,7 +496,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Dish">
-            <EntityTypeMapping TypeName="BD_ucheb_mukachevModel.Dish">
+            <EntityTypeMapping TypeName="NyamNyam_Session2_mukachevModel.Dish">
               <MappingFragment StoreEntitySet="Dish">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -524,8 +510,9 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Ingredient">
-            <EntityTypeMapping TypeName="BD_ucheb_mukachevModel.Ingredient">
+            <EntityTypeMapping TypeName="NyamNyam_Session2_mukachevModel.Ingredient">
               <MappingFragment StoreEntitySet="Ingredient">
+                <ScalarProperty Name="Visible" ColumnName="Visible" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="CostInCents" ColumnName="CostInCents" />
@@ -535,7 +522,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="IngredientOfStage">
-            <EntityTypeMapping TypeName="BD_ucheb_mukachevModel.IngredientOfStage">
+            <EntityTypeMapping TypeName="NyamNyam_Session2_mukachevModel.IngredientOfStage">
               <MappingFragment StoreEntitySet="IngredientOfStage">
                 <ScalarProperty Name="CookingStageId" ColumnName="CookingStageId" />
                 <ScalarProperty Name="IngredientId" ColumnName="IngredientId" />
@@ -544,7 +531,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Order">
-            <EntityTypeMapping TypeName="BD_ucheb_mukachevModel.Order">
+            <EntityTypeMapping TypeName="NyamNyam_Session2_mukachevModel.Order">
               <MappingFragment StoreEntitySet="Order">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="CreatedDT" ColumnName="CreatedDT" />
@@ -555,7 +542,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="OrderedDish">
-            <EntityTypeMapping TypeName="BD_ucheb_mukachevModel.OrderedDish">
+            <EntityTypeMapping TypeName="NyamNyam_Session2_mukachevModel.OrderedDish">
               <MappingFragment StoreEntitySet="OrderedDish">
                 <ScalarProperty Name="OrderId" ColumnName="OrderId" />
                 <ScalarProperty Name="DishId" ColumnName="DishId" />
@@ -566,7 +553,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Unit">
-            <EntityTypeMapping TypeName="BD_ucheb_mukachevModel.Unit">
+            <EntityTypeMapping TypeName="NyamNyam_Session2_mukachevModel.Unit">
               <MappingFragment StoreEntitySet="Unit">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
